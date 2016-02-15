@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<featureModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" name="Feature model name" description="Feature model description" xmlns="http://schemas.microsoft.com/dsltools/FeatureModelDSL">
+  <featureModelElements>
+    <feature name="Game" occurence="NotApply" description="A computer game" isReference="false">
+      <subFeatureModelElements>
+        <featureMoniker name="/Feature model name/Display" />
+        <featureMoniker name="/Feature model name/Entities" />
+      </subFeatureModelElements>
+    </feature>
+    <feature name="Display" occurence="Mandatory" description="Game display" isReference="false">
+      <subFeatureModelElements>
+        <featureMoniker name="/Feature model name/Windowed" />
+        <featureMoniker name="/Feature model name/FullScreen" />
+      </subFeatureModelElements>
+    </feature>
+    <feature name="Windowed" occurence="Optional" description="Game is played in a window" isReference="false" />
+    <feature name="FullScreen" occurence="Optional" description="Game is played in full screen" isReference="false" />
+    <feature name="Entities" occurence="Mandatory" description="Game entities" isReference="true" definitionFeatureModelFile="Entity.fm" />
+  </featureModelElements>
+</featureModel>

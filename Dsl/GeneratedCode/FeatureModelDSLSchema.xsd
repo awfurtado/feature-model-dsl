@@ -1,0 +1,362 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema id="FeatureModelDSLSchema" targetNamespace="http://schemas.microsoft.com/dsltools/FeatureModelDSL" elementFormDefault="qualified" xmlns="http://schemas.microsoft.com/dsltools/FeatureModelDSL" xmlns:core="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:import id="CoreSchema" namespace="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" />
+  <!-- Feature -->
+  <xsd:element name="feature" type="Feature" substitutionGroup="featureModelElement" />
+  <xsd:complexType name="Feature">
+    <xsd:annotation>
+      <xsd:documentation>Elements embedded in the model. Appear as boxes on the diagram.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="FeatureModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Relationship: Constrains -->
+          <xsd:element name="constrainedFeatures" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>Instances of Constrains</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element ref="constrains" minOccurs="0" maxOccurs="unbounded">
+                  <xsd:annotation>
+                    <xsd:documentation>[Instance of Constrains needs to be serialized in full-form]</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+        <!-- Property: Name -->
+        <xsd:attribute name="name" type="xsd:string" use="required" >
+          <xsd:annotation>
+            <xsd:documentation>Feature name</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <!-- Property: Occurence -->
+        <xsd:attribute name="occurence" type="Occurence" >
+          <xsd:annotation>
+            <xsd:documentation>How often the feature occurs across multiple products of the domain</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <!-- Property: Description -->
+        <xsd:attribute name="description" type="xsd:string" >
+          <xsd:annotation>
+            <xsd:documentation>Feature description</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <!-- Property: IsReference -->
+        <xsd:attribute name="isReference" type="xsd:boolean" >
+          <xsd:annotation>
+            <xsd:documentation>Wheter this feature is defined in a feature model other than this one.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <!-- Property: DefinitionFeatureModelFile -->
+        <xsd:attribute name="definitionFeatureModelFile" type="xsd:string" >
+          <xsd:annotation>
+            <xsd:documentation>If this feature is a reference, this property should be filled with the feature model file name containing the definition (for example, MainFeatureModel.fm). Leave this field blank otherwise.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- Feature Moniker -->
+  <xsd:element name="featureMoniker" type="FeatureMoniker" substitutionGroup="featureModelElementMoniker" />
+  <xsd:complexType name="FeatureMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for Feature instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="FeatureModelElementMoniker">
+        <xsd:attribute name="name" type="xsd:string" >
+          <xsd:annotation>
+            <xsd:documentation>Attribute to store the moniker string.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- Alternative -->
+  <xsd:element name="alternative" type="Alternative" substitutionGroup="featureModelElement" />
+  <xsd:complexType name="Alternative">
+    <xsd:complexContent>
+      <xsd:extension base="FeatureModelElement">
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <!-- Property: Min -->
+        <xsd:attribute name="min" type="xsd:integer" >
+          <xsd:annotation>
+            <xsd:documentation>Minimum number of features associated to this alternative set that should be selected when configuring a product</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <!-- Property: Max -->
+        <xsd:attribute name="max" type="xsd:integer" >
+          <xsd:annotation>
+            <xsd:documentation>Maximum number of features associated to this alternative set that should be selected when configuring a product</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- Alternative Moniker -->
+  <xsd:element name="alternativeMoniker" type="AlternativeMoniker" substitutionGroup="featureModelElementMoniker" />
+  <xsd:complexType name="AlternativeMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for Alternative instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="FeatureModelElementMoniker">
+        <xsd:attribute name="Id" type="xsd:string" >
+          <xsd:annotation>
+            <xsd:documentation>Attribute to store the moniker string.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- FeatureModelElement -->
+  <xsd:element name="featureModelElement" abstract="true" type="FeatureModelElement" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="FeatureModelElement" abstract="true" >
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Relationship: FeatureModelElementReferencesSubFeatureModelElements -->
+          <xsd:element name="subFeatureModelElements" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>Instances of FeatureModelElementReferencesSubFeatureModelElements</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:choice minOccurs="0" maxOccurs="unbounded" >
+                  <xsd:element ref="featureModelElementReferencesSubFeatureModelElements">
+                    <xsd:annotation>
+                      <xsd:documentation>[Relationship deriving from FeatureModelElementReferencesSubFeatureModelElements needs to be serialized in full-form]</xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element ref="featureModelElementMoniker" >
+                    <xsd:annotation>
+                      <xsd:documentation>[Target role-player]</xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:element>
+                </xsd:choice>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- FeatureModelElement Moniker -->
+  <xsd:element name="featureModelElementMoniker" abstract="true" type="FeatureModelElementMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="FeatureModelElementMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for FeatureModelElement instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- FeatureModel -->
+  <xsd:element name="featureModel" type="FeatureModel" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="FeatureModel">
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Relationship: FeatureModelHasFeatureModelElements -->
+          <xsd:element name="featureModelElements" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>Instances of FeatureModelHasFeatureModelElements</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:choice minOccurs="1" maxOccurs="unbounded" >
+                  <xsd:element ref="featureModelHasFeatureModelElements">
+                    <xsd:annotation>
+                      <xsd:documentation>[Relationship deriving from FeatureModelHasFeatureModelElements needs to be serialized in full-form]</xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element ref="featureModelElement" >
+                    <xsd:annotation>
+                      <xsd:documentation>[Target role-player]</xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:element>
+                </xsd:choice>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+        <!-- dslVersion -->
+        <xsd:attribute name="dslVersion" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Version of the model serialized in this file.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <!-- Property: Name -->
+        <xsd:attribute name="name" type="xsd:string" use="required" >
+          <xsd:annotation>
+            <xsd:documentation>Feature model name</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <!-- Property: Description -->
+        <xsd:attribute name="description" type="xsd:string" >
+          <xsd:annotation>
+            <xsd:documentation>Feature model description</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <!-- Property: ParentFeatureModelFile -->
+        <xsd:attribute name="parentFeatureModelFile" type="xsd:string" >
+          <xsd:annotation>
+            <xsd:documentation>If this feature model is actually a detailing of a subset of a parent feature model, the parent feature model file should be specified here. Otherwise, this field shoud be left blank.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- FeatureModel Moniker -->
+  <xsd:element name="featureModelMoniker" type="FeatureModelMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="FeatureModelMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for FeatureModel instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+        <xsd:attribute name="name" type="xsd:string" >
+          <xsd:annotation>
+            <xsd:documentation>Attribute to store the moniker string.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- FeatureModelElementReferencesSubFeatureModelElements -->
+  <xsd:element name="featureModelElementReferencesSubFeatureModelElements" abstract="true" type="FeatureModelElementReferencesSubFeatureModelElements" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="FeatureModelElementReferencesSubFeatureModelElements" abstract="true" >
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Target end FeatureModelElement -->
+          <xsd:element ref="featureModelElementMoniker" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>[Target role-player]</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- FeatureModelElementReferencesSubFeatureModelElements Moniker -->
+  <xsd:element name="featureModelElementReferencesSubFeatureModelElementsMoniker" abstract="true" type="FeatureModelElementReferencesSubFeatureModelElementsMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="FeatureModelElementReferencesSubFeatureModelElementsMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for FeatureModelElementReferencesSubFeatureModelElements instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- Constrains -->
+  <xsd:element name="constrains" type="Constrains" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="Constrains">
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Target end Feature -->
+          <xsd:element ref="featureMoniker" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>[Target role-player]</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+        <!-- Property: Constraint -->
+        <xsd:attribute name="constraint" type="xsd:string" >
+          <xsd:annotation>
+            <xsd:documentation>Type of constraint implied by this relationship</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- Constrains Moniker -->
+  <xsd:element name="constrainsMoniker" abstract="true" type="ConstrainsMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="ConstrainsMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for Constrains instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- FeatureModelHasFeatureModelElements -->
+  <xsd:element name="featureModelHasFeatureModelElements" abstract="true" type="FeatureModelHasFeatureModelElements" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="FeatureModelHasFeatureModelElements" abstract="true" >
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Target end FeatureModelElement -->
+          <xsd:element ref="featureModelElement" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>[Target role-player]</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- FeatureModelHasFeatureModelElements Moniker -->
+  <xsd:element name="featureModelHasFeatureModelElementsMoniker" abstract="true" type="FeatureModelHasFeatureModelElementsMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="FeatureModelHasFeatureModelElementsMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for FeatureModelHasFeatureModelElements instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- Enum Occurence -->
+  <xsd:simpleType name="Occurence">
+    <xsd:annotation>
+      <xsd:documentation>How often should a feature appear in the domain products</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Mandatory">
+        <xsd:annotation>
+          <xsd:documentation>The feature always occur in all product instances</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Optional">
+        <xsd:annotation>
+          <xsd:documentation>The feature may or may not occur in a product instance</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="NotApply">
+        <xsd:annotation>
+          <xsd:documentation>Occurence does not apply to the feature</xsd:documentation>
+          <xsd:documentation>Used for root domain concepts and features belonging to alternatives</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+</xsd:schema>
+

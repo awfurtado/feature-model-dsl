@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<minimalLanguageDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="FeatureModel1">
+  <featureModelMoniker name="/Feature model name" />
+  <nestedChildShapes>
+    <featureShape Id="8624e695-1d7b-47ac-b016-230870c8d7dd" absoluteBounds="3, 0.5, 1.5, 0.375">
+      <featureMoniker name="/Feature model name/Game" />
+    </featureShape>
+    <featureShape Id="a661108e-80d7-4b06-893d-b32f69f7b089" absoluteBounds="1.5, 1.625, 1.5, 0.375">
+      <featureMoniker name="/Feature model name/Display" />
+    </featureShape>
+    <connectConnector edgePoints="[(3.75 : 0.875); (2.25 : 1.625)]" fixedFrom="NotFixed" fixedTo="NotFixed" TargetRelationshipDomainClassId="3ede3913-0adb-4eb7-ab7d-49c96e946ea9">
+      <nodes>
+        <featureShapeMoniker Id="8624e695-1d7b-47ac-b016-230870c8d7dd" />
+        <featureShapeMoniker Id="a661108e-80d7-4b06-893d-b32f69f7b089" />
+      </nodes>
+    </connectConnector>
+    <featureShape Id="ae31fa4c-687e-4d5e-ac73-6a097dc8352f" absoluteBounds="0.5, 2.75, 1.5, 0.375">
+      <featureMoniker name="/Feature model name/Windowed" />
+    </featureShape>
+    <featureShape Id="e0612320-ec34-424a-8f0b-a1fd38bf16e4" absoluteBounds="2.375, 2.75, 1.5, 0.375">
+      <featureMoniker name="/Feature model name/FullScreen" />
+    </featureShape>
+    <connectConnector edgePoints="[(2.25 : 2); (1.25 : 2.75)]" fixedFrom="NotFixed" fixedTo="NotFixed" TargetRelationshipDomainClassId="3ede3913-0adb-4eb7-ab7d-49c96e946ea9">
+      <nodes>
+        <featureShapeMoniker Id="a661108e-80d7-4b06-893d-b32f69f7b089" />
+        <featureShapeMoniker Id="ae31fa4c-687e-4d5e-ac73-6a097dc8352f" />
+      </nodes>
+    </connectConnector>
+    <connectConnector edgePoints="[(2.25 : 2); (3.125 : 2.75)]" fixedFrom="NotFixed" fixedTo="NotFixed" TargetRelationshipDomainClassId="3ede3913-0adb-4eb7-ab7d-49c96e946ea9">
+      <nodes>
+        <featureShapeMoniker Id="a661108e-80d7-4b06-893d-b32f69f7b089" />
+        <featureShapeMoniker Id="e0612320-ec34-424a-8f0b-a1fd38bf16e4" />
+      </nodes>
+    </connectConnector>
+    <featureShape Id="abdff224-987d-478a-a499-934e00088faa" absoluteBounds="4.25, 1.75, 1.5, 0.375">
+      <featureMoniker name="/Feature model name/Entities" />
+    </featureShape>
+    <connectConnector edgePoints="[(3.75 : 0.875); (5 : 1.75)]" fixedFrom="NotFixed" fixedTo="NotFixed" TargetRelationshipDomainClassId="3ede3913-0adb-4eb7-ab7d-49c96e946ea9">
+      <nodes>
+        <featureShapeMoniker Id="8624e695-1d7b-47ac-b016-230870c8d7dd" />
+        <featureShapeMoniker Id="abdff224-987d-478a-a499-934e00088faa" />
+      </nodes>
+    </connectConnector>
+  </nestedChildShapes>
+</minimalLanguageDiagram>

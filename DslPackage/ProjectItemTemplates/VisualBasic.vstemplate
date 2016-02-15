@@ -1,0 +1,16 @@
+﻿<!--DSL Tools Language Template-->
+<VSTemplate Version="2.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<TemplateData>
+		<Name Package="{abe2bc90-2b20-4ee8-9922-9ebbd51bd3b3}" ID="103"/>
+		<Description Package="{abe2bc90-2b20-4ee8-9922-9ebbd51bd3b3}" ID="102"/>
+		<Icon Package="{abe2bc90-2b20-4ee8-9922-9ebbd51bd3b3}" ID="201" />
+		<ProjectType>VisualBasic</ProjectType>
+		<SortOrder>360</SortOrder>
+		<DefaultName>FeatureModelDSL.fm</DefaultName>
+	</TemplateData>
+	<TemplateContent>
+		<ProjectItem TargetFileName="$fileinputname$.fm">fm.fm</ProjectItem>
+		<ProjectItem TargetFileName="$fileinputname$.fm.diagram">fm.diagram</ProjectItem>
+	</TemplateContent>
+</VSTemplate>
+

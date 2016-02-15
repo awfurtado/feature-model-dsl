@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<featureModel dslVersion="1.0.0.0" name="Feature model name" description="Feature model description" xmlns="http://schemas.microsoft.com/dsltools/FeatureModelDSL">
+  <featureModelElements>
+    <feature name="Root Feature" occurence="NotApply" description="Feature model root feature" />
+  </featureModelElements>
+</featureModel>

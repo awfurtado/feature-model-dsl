@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<minimalLanguageDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="FeatureModel1">
+  <featureModelMoniker name="/Feature model name" />
+  <nestedChildShapes>
+    <featureShape Id="8624e695-1d7b-47ac-b016-230870c8d7dd" absoluteBounds="3.5, 0.75, 1.5, 0.375">
+      <featureMoniker name="/Feature model name/Entity" />
+    </featureShape>
+  </nestedChildShapes>
+</minimalLanguageDiagram>

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<featureModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" name="Feature model name" description="Feature model description" xmlns="http://schemas.microsoft.com/dsltools/FeatureModelDSL">
+  <featureModelElements>
+    <feature name="Entity" occurence="NotApply" description="Game entities" isReference="false" />
+  </featureModelElements>
+</featureModel>

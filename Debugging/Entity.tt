@@ -1,0 +1,2 @@
+﻿<#@ include file="FeatureModel.tt" #>
+<#@ FeatureModelDSL processor="FeatureModelDSLDirectiveProcessor" requires="fileName='Entity.fm'" #>
